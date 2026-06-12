@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 本地演示 - 个人中心</title>
+    <link rel="stylesheet" href="./local-styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="./local-index.html">Kalodata Data Open Center</a>
+        <nav class="nav">
+          <a href="./local-index.html">Home</a>
+          <a href="./local-docs.html">API 文档</a>
+          <a href="./local-pricing.html">定价</a>
+          <a class="active" href="./local-center.html">个人中心</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="card hero">
+        <span class="hero-tag">企业账户中心</span>
+        <h1>采购、调用、密钥统一管理</h1>
+        <p class="muted">按接口维度查看调用详情与积分消耗，并完成密钥管理。</p>
+      </section>
+
+      <section class="section grid-2">
+        <article class="card panel">
+          <h2>单接口调用明细</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>接口</th>
+                  <th>调用数</th>
+                  <th>已扣积分数</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>/openapi/v1/tiktok/creator/rank</td>
+                  <td>1,240</td>
+                  <td>24.8</td>
+                </tr>
+                <tr>
+                  <td>/openapi/v1/tiktok/creator/detail</td>
+                  <td>3,120</td>
+                  <td>312.0</td>
+                </tr>
+                <tr>
+                  <td>/openapi/v1/tiktok/product/rank</td>
+                  <td>860</td>
+                  <td>17.2</td>
+                </tr>
+                <tr>
+                  <td>/openapi/v1/tiktok/product/detail</td>
+                  <td>1,540</td>
+                  <td>154.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <div style="display: grid; gap: 12px">
+          <article class="card aside">
+            <h2>积分余额</h2>
+            <p class="points">当前剩余积分数：xx</p>
+            <p class="muted">
+              可前往
+              <a href="./local-recharge.html">积分充值页面</a>
+              充值。
+            </p>
+          </article>
+
+          <article class="card panel">
+            <h2>接口密钥管理</h2>
+            <p class="muted">密钥不会存储。生成后请立即复制，复制后自动消失（本地演示）。</p>
+            <div class="formula" style="margin-top: 10px">示例密钥：sk_live_kalodata_xxxxxxxx</div>
+            <p class="section muted">调用限制：默认 1 秒最多 100 请求。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

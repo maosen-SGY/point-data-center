@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 开放平台中心 - 定价（积分版）</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --text: #12223a;
+        --muted: #61708a;
+        --primary: #2f6bff;
+        --line: #e5ebf5;
+        --shadow: 0 8px 28px rgba(18, 34, 58, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 24px auto;
+        padding: 0 16px 24px;
+      }
+
+      .hero {
+        background: linear-gradient(120deg, #eef4ff, #f8fbff);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-tag {
+        display: inline-block;
+        font-size: 12px;
+        color: #2853c7;
+        background: #e6edff;
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+
+      h1 {
+        margin: 10px 0 8px;
+        font-size: 28px;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .layout {
+        margin-top: 18px;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        align-items: start;
+      }
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .product-card {
+        padding: 14px;
+      }
+
+      .product-card h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .product-meta {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        word-break: break-all;
+      }
+
+      .formula {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #355176;
+        background: #f5f8ff;
+        border: 1px solid #e1e9ff;
+        border-radius: 8px;
+        padding: 6px 8px;
+      }
+
+      .product-footer {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #5a6f95;
+      }
+
+      .aside {
+        padding: 16px;
+      }
+
+      .aside h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .points {
+        margin: 10px 0 8px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .muted {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .actions {
+        margin-top: 14px;
+      }
+
+      .btn-link {
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .note {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media (max-width: 960px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .products {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero card">
+        <span class="hero-tag">商品化采购</span>
+        <h1>按需调用 + 灵活扩容</h1>
+        <p>
+          计费方式说明：按单个接口维度计费。详情接口每次调用消耗
+          <strong>0.1 积分</strong>，榜单接口每次调用扣减积分 =
+          <strong>0.1 × (page/5)</strong>。每个商品默认对应
+          <strong>1 次</strong>
+          调用。
+        </p>
+      </section>
+
+      <section class="layout">
+        <article>
+          <div id="productGrid" class="products"></div>
+          <p class="note">* 榜单接口：每次调用扣减 = 0.1 × (page/5)；详情接口：每次调用扣减 = 0.1。</p>
+        </article>
+
+        <aside class="card aside">
+          <h3>积分余额</h3>
+          <p class="points" id="pointsText">当前您的积分数为：xx</p>
+          <p class="muted">积分可用于所有接口调用，扣减规则统一。</p>
+          <div class="actions">
+            <a class="btn-link" href="./recharge.html">前往积分充值页面</a>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const currentPoints = "xx";
+      const products = [
+        { name: "类目榜单（1次）", path: "/openapi/v1/category/rank", type: "rank" },
+        { name: "类目详情（1次）", path: "/openapi/v1/category/detail", type: "detail" },
+        { name: "店铺榜单（1次）", path: "/openapi/v1/tiktok/shop/rank", type: "rank" },
+        { name: "店铺详情（1次）", path: "/openapi/v1/tiktok/shop/detail", type: "detail" },
+        { name: "达人榜单（1次）", path: "/openapi/v1/tiktok/creator/rank", type: "rank" },
+        { name: "达人详情（1次）", path: "/openapi/v1/tiktok/creator/detail", type: "detail" },
+        { name: "商品榜单（1次）", path: "/openapi/v1/tiktok/product/rank", type: "rank" },
+        { name: "商品详情（1次）", path: "/openapi/v1/tiktok/product/detail", type: "detail" },
+        { name: "视频榜单（1次）", path: "/openapi/v1/tiktok/video/rank", type: "rank" },
+        { name: "视频详情（1次）", path: "/openapi/v1/tiktok/video/detail", type: "detail" },
+        { name: "直播榜单（1次）", path: "/openapi/v1/tiktok/livestream/rank", type: "rank" },
+        { name: "直播详情（1次）", path: "/openapi/v1/tiktok/livestream/detail", type: "detail" },
+      ];
+
+      function renderProducts() {
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products
+          .map(
+            (item) => `
+              <article class="card product-card">
+                <h3>${item.name}</h3>
+                <p class="product-meta">接口：${item.path}</p>
+                <div class="formula">扣减规则：${
+                  item.type === "rank" ? "每调用 1 次消耗 0.1 × (page/5) 积分" : "每调用 1 次消耗 0.1 积分"
+                }</div>
+                <div class="product-footer">按单接口计费</div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderPoints() {
+        const pointsText = document.getElementById("pointsText");
+        pointsText.textContent = `当前您的积分数为：${currentPoints}`;
+      }
+
+      renderProducts();
+      renderPoints();
+    </script>
+  </body>
+</html>

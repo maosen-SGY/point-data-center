@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 本地演示 - 定价</title>
+    <link rel="stylesheet" href="./local-styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="./local-index.html">Kalodata Data Open Center</a>
+        <nav class="nav">
+          <a href="./local-index.html">Home</a>
+          <a href="./local-docs.html">API 文档</a>
+          <a class="active" href="./local-pricing.html">定价</a>
+          <a href="./local-center.html">个人中心</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="card hero">
+        <span class="hero-tag">商品化采购</span>
+        <h1>按需调用 + 灵活扩容（本地独立页）</h1>
+        <p class="muted">
+          计费方式说明：按单个接口维度计费。详情接口每次调用消耗 <strong>0.1 积分</strong>；
+          榜单接口每次调用扣减积分 = <strong>0.1 × (page/5)</strong>。每个商品默认对应 <strong>1 次</strong> 调用。
+        </p>
+      </section>
+
+      <section class="section layout">
+        <article>
+          <div class="products" id="productGrid"></div>
+          <p class="muted section">* 榜单接口：每次调用扣减 = 0.1 × (page/5)；详情接口：每次调用扣减 = 0.1。</p>
+        </article>
+
+        <aside class="card aside">
+          <h2>积分余额</h2>
+          <p class="points" id="pointsText">当前您的积分数为：xx</p>
+          <p class="muted">积分可用于所有接口调用，扣减规则统一。</p>
+          <p class="section">
+            <a class="btn" href="./local-recharge.html">前往积分充值页面</a>
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const currentPoints = "xx";
+      const products = [
+        { name: "类目榜单（1次）", path: "/openapi/v1/category/rank", type: "rank" },
+        { name: "类目详情（1次）", path: "/openapi/v1/category/detail", type: "detail" },
+        { name: "店铺榜单（1次）", path: "/openapi/v1/tiktok/shop/rank", type: "rank" },
+        { name: "店铺详情（1次）", path: "/openapi/v1/tiktok/shop/detail", type: "detail" },
+        { name: "达人榜单（1次）", path: "/openapi/v1/tiktok/creator/rank", type: "rank" },
+        { name: "达人详情（1次）", path: "/openapi/v1/tiktok/creator/detail", type: "detail" },
+        { name: "商品榜单（1次）", path: "/openapi/v1/tiktok/product/rank", type: "rank" },
+        { name: "商品详情（1次）", path: "/openapi/v1/tiktok/product/detail", type: "detail" },
+        { name: "视频榜单（1次）", path: "/openapi/v1/tiktok/video/rank", type: "rank" },
+        { name: "视频详情（1次）", path: "/openapi/v1/tiktok/video/detail", type: "detail" },
+        { name: "直播榜单（1次）", path: "/openapi/v1/tiktok/livestream/rank", type: "rank" },
+        { name: "直播详情（1次）", path: "/openapi/v1/tiktok/livestream/detail", type: "detail" },
+      ];
+
+      document.getElementById("productGrid").innerHTML = products
+        .map(
+          (item) => `
+            <article class="card panel">
+              <h3>${item.name}</h3>
+              <p class="muted">接口：${item.path}</p>
+              <div class="formula">扣减规则：${
+                item.type === "rank" ? "每调用 1 次消耗 0.1 × (page/5) 积分" : "每调用 1 次消耗 0.1 积分"
+              }</div>
+              <span class="chip">按单接口计费</span>
+            </article>
+          `
+        )
+        .join("");
+
+      document.getElementById("pointsText").textContent = `当前您的积分数为：${currentPoints}`;
+    </script>
+  </body>
+</html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kalodata 本地交付 - 个人中心</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="../styles.css?v=20260612-2" />
+    <link rel="stylesheet" href="./chat-output-20260612/styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260612-2" />
     <style>
       #rechargeHint a {
         color: #2f6bff;
@@ -74,9 +74,7 @@
           <article class="card aside">
             <h2 id="balanceTitle">积分余额</h2>
             <p class="points" id="balanceText">当前剩余积分数：xx</p>
-            <p class="muted" id="rechargeHint">
-              可前往 <a href="./recharge.html" id="rechargeLinkText">积分充值页面</a> 充值。
-            </p>
+            <p class="muted" id="rechargeHint">可前往 <a href="./recharge.html" id="rechargeLinkText">积分充值页面</a> 充值。</p>
           </article>
 
           <article class="card panel">
@@ -120,12 +118,11 @@
         <svg id="trendSvg" class="trend-svg" viewBox="0 0 820 220" preserveAspectRatio="none"></svg>
       </section>
     </main>
+
     <div id="keyProfileModal" class="modal" aria-hidden="true">
       <div class="modal-card">
         <h3 data-i18n="center.key.profile.title">信息收集</h3>
-        <p class="muted" style="font-size: 13px" data-i18n="center.key.profile.desc">
-          为了更好的服务您，我们希望收集你的一些信息。
-        </p>
+        <p class="muted" style="font-size: 13px" data-i18n="center.key.profile.desc">为了更好的服务您，我们希望收集你的一些信息。</p>
         <div class="fields" style="grid-template-columns: 1fr; margin-top: 10px">
           <div class="field">
             <label data-i18n="center.key.profile.identity">您的身份类型</label>
@@ -133,12 +130,7 @@
           </div>
           <div class="field" id="profileIdentityOtherWrap" style="display: none">
             <label data-i18n="center.key.profile.identity.other">其他</label>
-            <input
-              id="profileIdentityOther"
-              type="text"
-              data-i18n-placeholder="center.key.profile.identity.otherPlaceholder"
-              placeholder="请输入您的身份类型"
-            />
+            <input id="profileIdentityOther" type="text" data-i18n-placeholder="center.key.profile.identity.otherPlaceholder" placeholder="请输入您的身份类型" />
           </div>
           <div class="field">
             <label data-i18n="center.key.profile.purpose">您的目的</label>
@@ -160,14 +152,13 @@
         </div>
         <p id="profileError" class="status-warn" style="display: none; margin-top: 10px"></p>
         <div class="hero-actions" style="margin-top: 12px">
-          <button id="profileSubmit" class="btn primary" type="button" data-i18n="center.key.profile.submit">
-            提交并继续
-          </button>
+          <button id="profileSubmit" class="btn primary" type="button" data-i18n="center.key.profile.submit">提交并继续</button>
           <button id="profileCancel" class="btn" type="button" data-i18n="center.key.profile.cancel">取消</button>
         </div>
       </div>
     </div>
-    <script src="../app.js?v=20260612-6"></script>
+
+    <script src="./app.js?v=20260612-6"></script>
     <script>
       const keyArea = document.getElementById("keyArea");
       const generateKeyBtn = document.getElementById("generateKey");
@@ -187,21 +178,16 @@
       let currentKey = "";
 
       function randomKey() {
-        return `sk_live_kalodata_${Math.random().toString(36).slice(2, 10)}${Math.random()
-          .toString(36)
-          .slice(2, 8)}`;
+        return `sk_live_kalodata_${Math.random().toString(36).slice(2, 10)}${Math.random().toString(36).slice(2, 8)}`;
       }
-
       function openProfileModal() {
         keyProfileModal.classList.add("open");
         keyProfileModal.setAttribute("aria-hidden", "false");
       }
-
       function closeProfileModal() {
         keyProfileModal.classList.remove("open");
         keyProfileModal.setAttribute("aria-hidden", "true");
       }
-
       function renderProfileOptions() {
         profileIdentity.innerHTML = `
           <option value="">--</option>
@@ -217,7 +203,6 @@
           <option value="client">${window.KDC.t("center.key.profile.purpose.client")}</option>
         `;
       }
-
       function issueKey() {
         currentKey = randomKey();
         keyArea.textContent = currentKey;
@@ -225,7 +210,6 @@
         copyKeyBtn.disabled = false;
         keyTip.textContent = window.KDC.t("center.key.generated");
       }
-
       function resetProfileForm() {
         profileIdentity.value = "";
         profileIdentityOther.value = "";
@@ -235,33 +219,23 @@
         profileIdentityOtherWrap.style.display = "none";
         profileError.style.display = "none";
       }
-
       generateKeyBtn.addEventListener("click", () => {
         resetProfileForm();
         openProfileModal();
       });
-
       profileIdentity.addEventListener("change", () => {
         const isOther = profileIdentity.value === "other";
         profileIdentityOtherWrap.style.display = isOther ? "block" : "none";
         if (!isOther) profileIdentityOther.value = "";
         profileError.style.display = "none";
       });
-
-      profileCancel.addEventListener("click", () => {
-        closeProfileModal();
-      });
-
+      profileCancel.addEventListener("click", closeProfileModal);
       profileAgreementLink.addEventListener("click", () => {
         profileAgreementContent.hidden = !profileAgreementContent.hidden;
       });
-
       profileAgreementCheck.addEventListener("change", () => {
-        if (profileAgreementCheck.checked) {
-          profileError.style.display = "none";
-        }
+        if (profileAgreementCheck.checked) profileError.style.display = "none";
       });
-
       profileSubmit.addEventListener("click", () => {
         if (!profileIdentity.value) {
           profileError.style.display = "block";
@@ -286,11 +260,9 @@
         closeProfileModal();
         issueKey();
       });
-
       keyProfileModal.addEventListener("click", (event) => {
         if (event.target === keyProfileModal) closeProfileModal();
       });
-
       copyKeyBtn.addEventListener("click", async () => {
         if (!currentKey) return;
         try {
@@ -310,7 +282,6 @@
         "creator-detail": [80, 70, 110, 130, 120, 160, 140, 150, 190, 170, 180, 220, 200, 210],
         "product-rank": [60, 90, 140, 200, 260, 300, 280, 250, 220, 240, 210, 230, 200, 180],
       };
-
       function renderTrend() {
         const endpoint = document.getElementById("trendEndpoint").value;
         const range = Number(document.getElementById("trendRange").value);
@@ -324,14 +295,12 @@
         const padY = 20;
         const plotW = width - padX * 2;
         const plotH = height - padY * 2;
-
         const coords = points.map((value, idx) => {
           const x = padX + (idx / (points.length - 1 || 1)) * plotW;
           const y = padY + (1 - (value - min) / (max - min || 1)) * plotH;
           return [x, y];
         });
         const polyline = coords.map((c) => `${c[0]},${c[1]}`).join(" ");
-
         const svg = document.getElementById("trendSvg");
         svg.innerHTML = `
           <line x1="${padX}" y1="${height - padY}" x2="${width - padX}" y2="${height - padY}" stroke="#d5e3ff" />
@@ -342,7 +311,6 @@
           <text x="${width - 72}" y="${height - 8}" fill="#5a6f95" font-size="11">${window.KDC.t("center.trend.axisX")}</text>
         `;
       }
-
       document.getElementById("trendEndpoint").addEventListener("change", renderTrend);
       document.getElementById("trendRange").addEventListener("change", renderTrend);
     </script>
@@ -387,12 +355,10 @@
           rechargeSuffix: " to top up.",
         },
       };
-
       function activeTexts() {
         const lang = (window.KDC?.settings?.language || "zh-CN").toLowerCase();
         return lang.startsWith("zh") ? pageTexts.zh : pageTexts.en;
       }
-
       const usageRows = [
         { api: "/openapi/v1/tiktok/creator/rank", calls: "1,240", deducted: "24.8" },
         { api: "/openapi/v1/tiktok/creator/detail", calls: "3,120", deducted: "312.0" },
@@ -416,28 +382,16 @@
       const usagePrev = document.getElementById("usagePrev");
       const usageNext = document.getElementById("usageNext");
       const usagePageSelect = document.getElementById("usagePageSelect");
-
       function pagerText(format, page, total) {
         return format.replace("{page}", String(page)).replace("{total}", String(total));
       }
-
       function renderUsageTable() {
         const t = activeTexts();
         const totalPages = Math.max(1, Math.ceil(usageRows.length / usagePageSize));
         if (usagePage > totalPages) usagePage = totalPages;
         const start = (usagePage - 1) * usagePageSize;
         const current = usageRows.slice(start, start + usagePageSize);
-
-        usageBody.innerHTML = current
-          .map(
-            (row) => `<tr>
-              <td>${row.api}</td>
-              <td>${row.calls}</td>
-              <td>${row.deducted}</td>
-            </tr>`
-          )
-          .join("");
-
+        usageBody.innerHTML = current.map((row) => `<tr><td>${row.api}</td><td>${row.calls}</td><td>${row.deducted}</td></tr>`).join("");
         usagePageSelect.innerHTML = Array.from({ length: totalPages }, (_, i) => {
           const page = i + 1;
           return `<option value="${page}">${pagerText(t.pagerFormat, page, totalPages)}</option>`;
@@ -446,7 +400,6 @@
         usagePrev.disabled = usagePage <= 1;
         usageNext.disabled = usagePage >= totalPages;
       }
-
       usagePrev.addEventListener("click", () => {
         if (usagePage > 1) {
           usagePage -= 1;
@@ -464,7 +417,6 @@
         usagePage = Number(usagePageSelect.value) || 1;
         renderUsageTable();
       });
-
       function applyPageTexts() {
         const t = activeTexts();
         document.getElementById("centerTag").textContent = t.tag;
@@ -500,7 +452,6 @@
         }
         renderTrend();
       }
-
       applyPageTexts();
       window.addEventListener("kdc:settingsChanged", applyPageTexts);
     </script>

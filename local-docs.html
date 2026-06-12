@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 本地演示 - API 文档</title>
+    <link rel="stylesheet" href="./local-styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a class="brand" href="./local-index.html">Kalodata Data Open Center</a>
+        <nav class="nav">
+          <a href="./local-index.html">Home</a>
+          <a class="active" href="./local-docs.html">API 文档</a>
+          <a href="./local-pricing.html">定价</a>
+          <a href="./local-center.html">个人中心</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="card hero">
+        <span class="hero-tag">API 文档</span>
+        <h1>接口接入说明（本地版）</h1>
+        <p class="muted">
+          所有接口采用 HTTP POST + JSON，通过请求头 <code>secret-key</code> 鉴权。公共参数：
+          <code>region</code> / <code>language</code> / <code>currency</code> / <code>date_range</code>。
+        </p>
+      </section>
+
+      <section class="section card panel">
+        <h2>对接流程</h2>
+        <ol class="doc-list">
+          <li>前往 <a href="./local-center.html">个人中心</a> 管理密钥与调用明细。</li>
+          <li>
+            前往 <a href="./local-pricing.html">定价页</a> 查看积分规则：榜单接口单次扣减 = 0.1 × (page/5)，详情接口单次扣减 =
+            0.1。
+          </li>
+          <li>按下方入参/出参结构完成接口接入。</li>
+        </ol>
+      </section>
+
+      <section class="section grid-2">
+        <article class="card panel">
+          <h2>示例接口</h2>
+          <p><strong>Path：</strong>/openapi/v1/tiktok/creator/rank</p>
+          <span class="chip">POST</span>
+          <pre class="formula" style="white-space: pre-wrap; margin-top: 10px">{
+  "region": "US",
+  "language": "zh-CN",
+  "currency": "USD",
+  "date_range": "2026-06-01~2026-06-07",
+  "page": 10,
+  "page_size": 20
+}</pre>
+          <p class="muted section">榜单接口积分示例：0.1 × (10/5) = 0.2 积分/次</p>
+        </article>
+
+        <article class="card panel">
+          <h2>返回结构（示例）</h2>
+          <pre class="formula" style="white-space: pre-wrap">{
+  "code": 0,
+  "message": "ok",
+  "data": {
+    "total": 1280,
+    "list": [
+      {
+        "creator_id": "123456",
+        "creator_name": "demo_creator",
+        "gmv": 12345.67,
+        "orders": 320
+      }
+    ]
+  }
+}</pre>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
