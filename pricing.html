@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kalodata 本地交付 - 定价</title>
-    <link rel="stylesheet" href="./chat-output-20260612/styles.css" />
-    <link rel="stylesheet" href="./styles.css?v=20260612-2" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="../styles.css?v=20260612-2" />
     <style>
       #pointsPanel {
         position: sticky;
         top: 88px;
       }
+
       #rechargeHint a {
         color: #2f6bff;
       }
@@ -60,12 +61,14 @@
           <h2 id="pointsTitle">积分余额</h2>
           <p class="points" id="pointsText">当前您的积分数为：xx</p>
           <p class="muted" id="pointsHint">积分可用于所有接口调用，扣减规则统一。</p>
-          <p class="section muted" id="rechargeHint">可前往 <a href="./recharge.html" id="rechargeLinkText">积分充值页面</a> 充值。</p>
+          <p class="section muted" id="rechargeHint">
+            可前往 <a href="./recharge.html" id="rechargeLinkText">积分充值页面</a> 充值。
+          </p>
         </aside>
       </section>
     </main>
 
-    <script src="./app.js?v=20260612-6"></script>
+    <script src="../app.js?v=20260612-6"></script>
     <script>
       const currentPoints = "xx";
       const pageTexts = {
