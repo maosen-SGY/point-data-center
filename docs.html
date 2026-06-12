@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 开放平台中心 - API 文档</title>
+    <link rel="stylesheet" href="../styles.css?v=20260612-2" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="./index.html">
+          <span class="brand-logo">K</span>
+          <span class="brand-text">
+            <strong data-i18n="brand.title">Kalodata Data Open Center</strong>
+            <span data-i18n="brand.sub">开放平台中心</span>
+          </span>
+        </a>
+        <nav class="top-nav">
+          <a href="./index.html" data-i18n="nav.home">Home</a>
+          <a class="active" href="./docs.html" data-i18n="nav.docs">API 文档</a>
+          <a href="./pricing.html" data-i18n="nav.pricing">定价</a>
+          <a href="./center.html" data-i18n="nav.center">个人中心</a>
+          <span class="global-controls">
+            <select id="global-region" aria-label="region"></select>
+            <select id="global-language" aria-label="language"></select>
+            <select id="global-currency" aria-label="currency"></select>
+          </span>
+          <button class="btn" data-i18n="action.login">登录</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="doc-layout">
+        <aside class="card doc-sidebar">
+          <h3 data-i18n="docs.sidebar.title">接口目录</h3>
+          <div id="doc-nav"></div>
+        </aside>
+
+        <section class="card doc-content">
+          <h1 class="endpoint-title" data-i18n="docs.title">API 文档</h1>
+          <p class="endpoint-meta" data-i18n="docs.subtitle">当前开放服务：API（MCP / Agent 敬请期待）</p>
+
+          <div class="callout">
+            <strong data-i18n="docs.flow.title">对接流程</strong>
+            <ol class="steps">
+              <li><span data-i18n="docs.flow.1">前往</span> <a href="./center.html"><strong data-i18n="docs.flow.1.link">个人中心</strong></a> <span data-i18n="docs.flow.1.tail">创建/管理您的接口密钥。</span></li>
+              <li><span data-i18n="docs.flow.2">前往</span> <a href="./pricing.html"><strong data-i18n="docs.flow.2.link">定价</strong></a> <span data-i18n="docs.flow.2.tail">页面购买对应接口。</span></li>
+              <li data-i18n="docs.flow.3">按下方文档说明完成接口入参与返回字段接入。</li>
+            </ol>
+          </div>
+
+          <h2 class="endpoint-title" id="endpoint-title" style="font-size: 24px; margin-top: 16px"></h2>
+          <p class="endpoint-meta" id="endpoint-intent"></p>
+          <div style="margin-top: 10px">
+            <span class="chip method" id="endpoint-method"></span>
+            <span class="chip route" id="endpoint-path"></span>
+          </div>
+
+          <div class="callout">
+            <strong data-i18n="docs.integration.title">对接方式</strong>
+            <p data-i18n="docs.integration.desc">所有接口采用 HTTP POST + JSON，通过请求头 secret-key 鉴权。公共请求参数为 region / language / currency / date_range。本页面仅展示接口结构，不提供在线调试。</p>
+          </div>
+
+          <section class="block">
+            <h3 data-i18n="docs.req.title">请求参数（入参）</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th data-i18n="docs.req.h1">参数名称</th>
+                    <th data-i18n="docs.req.h2">类型</th>
+                    <th data-i18n="docs.req.h3">说明</th>
+                    <th data-i18n="docs.req.h4">示例</th>
+                    <th data-i18n="docs.req.h5">必传</th>
+                  </tr>
+                </thead>
+                <tbody id="request-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="block">
+            <h3 data-i18n="docs.res.title">返回参数（出参）</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th data-i18n="docs.res.h1">字段</th>
+                    <th data-i18n="docs.res.h2">类型</th>
+                    <th data-i18n="docs.res.h3">说明</th>
+                    <th data-i18n="docs.res.h4">示例</th>
+                  </tr>
+                </thead>
+                <tbody id="response-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="block">
+            <h3 data-i18n="docs.sample.title">返回示例（结构）</h3>
+            <div class="callout">
+              <pre id="response-json" class="mono"></pre>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="../app.js?v=20260612-6"></script>
+    <script src="../docs.js?v=20260612-3"></script>
+  </body>
+</html>

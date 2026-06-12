@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 开放平台中心 - Home</title>
+    <link rel="stylesheet" href="../styles.css?v=20260612-2" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="./index.html">
+          <span class="brand-logo">K</span>
+          <span class="brand-text">
+            <strong data-i18n="brand.title">Kalodata Data Open Center</strong>
+            <span data-i18n="brand.sub">开放平台中心</span>
+          </span>
+        </a>
+        <nav class="top-nav">
+          <a class="active" href="./index.html" data-i18n="nav.home">Home</a>
+          <a href="./docs.html" data-i18n="nav.docs">API 文档</a>
+          <a href="./pricing.html" data-i18n="nav.pricing">定价</a>
+          <a href="./center.html" data-i18n="nav.center">个人中心</a>
+          <span class="global-controls">
+            <select id="global-region" aria-label="region"></select>
+            <select id="global-language" aria-label="language"></select>
+            <select id="global-currency" aria-label="currency"></select>
+          </span>
+          <button class="btn" data-i18n="action.login">登录</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="home-wrap">
+        <section class="card hero-centered">
+          <span class="hero-tag" data-i18n="home.hero.tag">连接业务与电商数据洞察</span>
+          <h1 data-i18n="home.hero.title">一个中心，三种载体，持续开放能力</h1>
+          <p data-i18n="home.hero.desc">
+            Kalodata 数据开放中心面向品牌方、服务商和技术团队，提供标准化、可计算、可集成的 TikTok Shop
+            数据能力。你可以按业务场景选择 API、MCP、Agent 等载体接入，当前已上线 API 服务，MCP 与 Agent 即将推出。
+          </p>
+          <div class="metric-grid">
+            <article class="metric-item"><strong>20+</strong><span data-i18n="home.metric.api">当前开放 API 接口</span></article>
+            <article class="metric-item"><strong>6</strong><span data-i18n="home.metric.modules">核心数据模块</span></article>
+            <article class="metric-item"><strong>15</strong><span data-i18n="home.metric.sites">TikTok Shop 覆盖站点</span></article>
+            <article class="metric-item"><strong>99.9%</strong><span data-i18n="home.metric.sla">SLA 可用性</span></article>
+          </div>
+          <div class="hero-actions" style="justify-content: center">
+            <a class="btn primary" href="./docs.html" data-i18n="home.hero.docs">查看 API 文档</a>
+            <a class="btn" href="./pricing.html" data-i18n="home.hero.pricing">查看采购规则</a>
+          </div>
+        </section>
+
+        <section class="card center-section">
+          <div class="center-head">
+            <h2 data-i18n="home.access.title">三种接入载体，适配不同团队</h2>
+            <p data-i18n="home.access.sub">参考 open.sellersprite.com 首页结构，突出“载体选择 + 场景适配 + 上线状态”。</p>
+          </div>
+          <div class="access-grid">
+            <article class="access-card">
+              <span class="pill ok" data-i18n="home.status.available">当前可用</span>
+              <h3>API</h3>
+              <p data-i18n="home.access.api.desc">标准 HTTP + JSON 接口，适合系统集成和数据平台对接。</p>
+              <ul>
+                <li data-i18n="home.access.api.b1">6 大模块数据能力</li>
+                <li data-i18n="home.access.api.b2">榜单 + 详情双接口设计</li>
+                <li data-i18n="home.access.api.b3">按接口与调用量计费</li>
+              </ul>
+            </article>
+            <article class="access-card">
+              <span class="pill wait" data-i18n="home.status.coming">敬请期待</span>
+              <h3>MCP</h3>
+              <p data-i18n="home.access.mcp.desc">面向 AI 原生工具链，支持模型和自动化工作流直接调用数据能力。</p>
+              <ul>
+                <li data-i18n="home.access.mcp.b1">AI 工具编排接入</li>
+                <li data-i18n="home.access.mcp.b2">更低门槛的数据消费</li>
+                <li data-i18n="home.access.mcp.b3">适配智能工作流</li>
+              </ul>
+            </article>
+            <article class="access-card">
+              <span class="pill wait" data-i18n="home.status.coming">敬请期待</span>
+              <h3>Agent</h3>
+              <p data-i18n="home.access.agent.desc">面向智能分析任务，支持以自然语言完成洞察提取与业务辅助决策。</p>
+              <ul>
+                <li data-i18n="home.access.agent.b1">任务化数据分析</li>
+                <li data-i18n="home.access.agent.b2">多轮上下文协同</li>
+                <li data-i18n="home.access.agent.b3">面向运营与策略团队</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="../app.js?v=20260612-6"></script>
+  </body>
+</html>

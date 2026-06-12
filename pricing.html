@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalodata 本地交付 - 定价</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="../styles.css?v=20260612-2" />
+    <style>
+      #pointsPanel {
+        position: sticky;
+        top: 88px;
+      }
+
+      #rechargeHint a {
+        color: #2f6bff;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="./index.html">
+          <span class="brand-logo">K</span>
+          <span class="brand-text">
+            <strong data-i18n="brand.title">Kalodata Data Open Center</strong>
+            <span data-i18n="brand.sub">开放平台中心</span>
+          </span>
+        </a>
+        <nav class="top-nav">
+          <a href="./index.html" data-i18n="nav.home">Home</a>
+          <a href="./docs.html" data-i18n="nav.docs">API 文档</a>
+          <a class="active" href="./pricing.html" data-i18n="nav.pricing">定价</a>
+          <a href="./center.html" data-i18n="nav.center">个人中心</a>
+          <span class="global-controls">
+            <select id="global-region" aria-label="region"></select>
+            <select id="global-language" aria-label="language"></select>
+            <select id="global-currency" aria-label="currency"></select>
+          </span>
+          <button class="btn" data-i18n="action.login">登录</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="card hero">
+        <span class="hero-tag" id="pricingTag">商品化采购</span>
+        <h1 id="pricingTitle">按需调用 + 灵活扩容</h1>
+        <p class="muted" id="pricingDesc">
+          计费方式说明：按单个接口维度计费。详情接口每次调用消耗 <strong>0.1 积分</strong>；榜单接口每次调用扣减积分 = <strong>0.1 × (page/5)</strong>。
+        </p>
+      </section>
+
+      <section class="section layout">
+        <article>
+          <div class="products" id="productGrid"></div>
+          <p class="muted section" id="pricingNote">* 榜单接口：每次调用扣减 = 0.1 × (page/5)；详情接口：每次调用扣减 = 0.1。</p>
+        </article>
+
+        <aside class="card aside" id="pointsPanel">
+          <h2 id="pointsTitle">积分余额</h2>
+          <p class="points" id="pointsText">当前您的积分数为：xx</p>
+          <p class="muted" id="pointsHint">积分可用于所有接口调用，扣减规则统一。</p>
+          <p class="section muted" id="rechargeHint">
+            可前往 <a href="./recharge.html" id="rechargeLinkText">积分充值页面</a> 充值。
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="../app.js?v=20260612-6"></script>
+    <script>
+      const currentPoints = "xx";
+      const pageTexts = {
+        zh: {
+          tag: "商品化采购",
+          title: "按需调用 + 灵活扩容",
+          desc: "计费方式说明：按单个接口维度计费。详情接口每次调用消耗 <strong>0.1 积分</strong>；榜单接口每次调用扣减积分 = <strong>0.1 × (page/5)</strong>。",
+          note: "* 榜单接口：每次调用扣减 = 0.1 × (page/5)；详情接口：每次调用扣减 = 0.1。",
+          pointsTitle: "积分余额",
+          pointsText: "当前您的积分数为：{points}",
+          pointsHint: "积分可用于所有接口调用，扣减规则统一。",
+          rechargePrefix: "可前往 ",
+          rechargeLink: "积分充值页面",
+          rechargeSuffix: " 充值。",
+          endpoint: "接口：",
+          rulePrefix: "扣减规则：",
+          rankRule: "每调用 1 次消耗 0.1 × (page/5) 积分",
+          detailRule: "每调用 1 次消耗 0.1 积分",
+          names: {
+            categoryRank: "类目榜单（1次）",
+            categoryDetail: "类目详情（1次）",
+            shopRank: "店铺榜单（1次）",
+            shopDetail: "店铺详情（1次）",
+            creatorRank: "达人榜单（1次）",
+            creatorDetail: "达人详情（1次）",
+            productRank: "商品榜单（1次）",
+            productDetail: "商品详情（1次）",
+            videoRank: "视频榜单（1次）",
+            videoDetail: "视频详情（1次）",
+            liveRank: "直播榜单（1次）",
+            liveDetail: "直播详情（1次）",
+          },
+        },
+        en: {
+          tag: "Product Purchase",
+          title: "On-demand Calls + Flexible Scaling",
+          desc: "Billing: per endpoint. Detail APIs cost <strong>0.1 point</strong> per call; rank APIs cost <strong>0.1 × (page/5)</strong> per call.",
+          note: "* Rank APIs: deduction per call = 0.1 × (page/5); Detail APIs: deduction per call = 0.1.",
+          pointsTitle: "Point Balance",
+          pointsText: "Your current points: {points}",
+          pointsHint: "Points can be used for all API calls with unified deduction rules.",
+          rechargePrefix: "Go to ",
+          rechargeLink: "Points Recharge Page",
+          rechargeSuffix: " to top up.",
+          endpoint: "API: ",
+          rulePrefix: "Rule: ",
+          rankRule: "Each call consumes 0.1 × (page/5) points",
+          detailRule: "Each call consumes 0.1 points",
+          names: {
+            categoryRank: "Category Rank (1 call)",
+            categoryDetail: "Category Detail (1 call)",
+            shopRank: "Shop Rank (1 call)",
+            shopDetail: "Shop Detail (1 call)",
+            creatorRank: "Creator Rank (1 call)",
+            creatorDetail: "Creator Detail (1 call)",
+            productRank: "Product Rank (1 call)",
+            productDetail: "Product Detail (1 call)",
+            videoRank: "Video Rank (1 call)",
+            videoDetail: "Video Detail (1 call)",
+            liveRank: "Livestream Rank (1 call)",
+            liveDetail: "Livestream Detail (1 call)",
+          },
+        },
+      };
+
+      const products = [
+        { nameKey: "categoryRank", path: "/openapi/v1/category/rank", type: "rank" },
+        { nameKey: "categoryDetail", path: "/openapi/v1/category/detail", type: "detail" },
+        { nameKey: "shopRank", path: "/openapi/v1/tiktok/shop/rank", type: "rank" },
+        { nameKey: "shopDetail", path: "/openapi/v1/tiktok/shop/detail", type: "detail" },
+        { nameKey: "creatorRank", path: "/openapi/v1/tiktok/creator/rank", type: "rank" },
+        { nameKey: "creatorDetail", path: "/openapi/v1/tiktok/creator/detail", type: "detail" },
+        { nameKey: "productRank", path: "/openapi/v1/tiktok/product/rank", type: "rank" },
+        { nameKey: "productDetail", path: "/openapi/v1/tiktok/product/detail", type: "detail" },
+        { nameKey: "videoRank", path: "/openapi/v1/tiktok/video/rank", type: "rank" },
+        { nameKey: "videoDetail", path: "/openapi/v1/tiktok/video/detail", type: "detail" },
+        { nameKey: "liveRank", path: "/openapi/v1/tiktok/livestream/rank", type: "rank" },
+        { nameKey: "liveDetail", path: "/openapi/v1/tiktok/livestream/detail", type: "detail" },
+      ];
+
+      function activeTexts() {
+        const lang = (window.KDC?.settings?.language || "zh-CN").toLowerCase();
+        return lang.startsWith("zh") ? pageTexts.zh : pageTexts.en;
+      }
+
+      function renderProducts() {
+        const t = activeTexts();
+        document.getElementById("productGrid").innerHTML = products
+          .map(
+            (item) => `
+              <article class="card panel">
+                <h3>${t.names[item.nameKey]}</h3>
+                <p class="muted">${t.endpoint}${item.path}</p>
+                <div class="formula">${t.rulePrefix}${item.type === "rank" ? t.rankRule : t.detailRule}</div>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderPageTexts() {
+        const t = activeTexts();
+        document.getElementById("pricingTag").textContent = t.tag;
+        document.getElementById("pricingTitle").textContent = t.title;
+        document.getElementById("pricingDesc").innerHTML = t.desc;
+        document.getElementById("pricingNote").textContent = t.note;
+        document.getElementById("pointsTitle").textContent = t.pointsTitle;
+        document.getElementById("pointsText").textContent = t.pointsText.replace("{points}", currentPoints);
+        document.getElementById("pointsHint").textContent = t.pointsHint;
+        document.getElementById("rechargeHint").innerHTML = `${t.rechargePrefix}<a href="./recharge.html" id="rechargeLinkText">${t.rechargeLink}</a>${t.rechargeSuffix}`;
+      }
+
+      function renderAll() {
+        renderPageTexts();
+        renderProducts();
+      }
+
+      renderAll();
+      window.addEventListener("kdc:settingsChanged", renderAll);
+    </script>
+  </body>
+</html>
